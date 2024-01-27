@@ -1,0 +1,55 @@
+{% extends 'default/default.html' %}
+
+
+{% load censor %}
+
+
+<!-- Подключаем новый файл с нашим тегом -->
+
+
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+   <h1>Все новости</h1>
+   <!-- Вот так выглядело использование переменной и фильтра -->
+
+   <!-- <h3>{{ time_now|date:'M d Y' }}</h3> -->
+
+   <!-- А вот так мы используем наш тег-->
+
+
+
+
+   <hr>
+   {% if news %}
+       <table>
+           <tr>
+               <td>Заголовок</td>
+               <td>Дата написания</td>
+               <td>Текс</td>
+
+           </tr>
+
+           {% for new in news %}
+           <tr>
+               <td><a href="{% url 'new' new.id %}">{{ new.title|censor }}</a></td>
+               <td>{{ new.date_add| date:'M d Y' }}</td>
+               <td>{{ new.post|truncatechars:20 }}</td>
+
+           </tr>
+           {% endfor %}
+
+       </table>
+   {% else %}
+       <h2>Товаров нет!</h2>
+
+   {% endif %}
+{% endblock content %}
+
+
+
+
+
