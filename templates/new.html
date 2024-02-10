@@ -11,4 +11,10 @@ Product
 <h1>{{ new.title|censor }}</h1>
 <h3>{{ new.date_add| date:'d M y' }}</h3>
 <p>{{ new.post|censor }}</p>
+
+
+    <a href = "{% url 'news' %}">Вернутся на главную</a>
+
+
+
 {% endblock content %}
