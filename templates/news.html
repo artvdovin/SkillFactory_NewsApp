@@ -21,9 +21,10 @@ Products
    <!-- А вот так мы используем наш тег-->
 
 
-
+     {% if perms.newspaper.add_post %}
     <a href ="{% url 'create_nw' %}">Добавить новость  </a><br>
     <a href ="{% url 'create_ar' %}">Добавить статью</a><br>
+    {% endif %}
     <a href = '{% url 'search' %}'>Поиск</a><br>
    <hr>
    {% if news %}

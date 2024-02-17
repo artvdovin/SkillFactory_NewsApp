@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView,UpdateView, DeleteView
@@ -47,7 +48,8 @@ class Search (ListView):
         return context
 
 
-class PostCreate_NW(CreateView):
+class PostCreate_NW(PermissionRequiredMixin,CreateView):
+    permission_required = ('newspaper.add_post',)
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
@@ -60,7 +62,8 @@ class PostCreate_NW(CreateView):
         post.categoryType = 'NW'
         return super().form_valid(form)
 
-class PostEdit_NW (UpdateView):
+class PostEdit_NW (PermissionRequiredMixin,UpdateView):
+    permission_required = ('newspaper.add_post',)
     form_class = PostForm
     # модель товаров
     model = Post
@@ -68,13 +71,15 @@ class PostEdit_NW (UpdateView):
     template_name = 'news_edit.html'
 
 
-class Delete_NW (DeleteView):
+class Delete_NW (PermissionRequiredMixin,DeleteView):
+    permission_required = ('newspaper.add_post',)
     model = Post
     template_name = 'news_del.html'
     success_url = reverse_lazy("news")
 
 
-class PostCreate_AR(CreateView):
+class PostCreate_AR(PermissionRequiredMixin,CreateView):
+    permission_required = ('newspaper.add_post',)
     # Указываем нашу разработанную форму
     form_class = PostForm
     # модель товаров
@@ -87,7 +92,8 @@ class PostCreate_AR(CreateView):
         post.categoryType = 'AR'
         return super().form_valid(form)
 
-class PostEdit_AR (UpdateView):
+class PostEdit_AR (PermissionRequiredMixin,UpdateView):
+    permission_required = ('newspaper.add_post',)
     form_class = PostForm
     # модель товаров
     model = Post
@@ -95,7 +101,8 @@ class PostEdit_AR (UpdateView):
     template_name = 'articles_edit.html'
 
 
-class Delete_AR (DeleteView):
+class Delete_AR (PermissionRequiredMixin,DeleteView):
+    permission_required = ('newspaper.add_post',)
     model = Post
     template_name = 'articles_del.html'
     success_url = reverse_lazy("news")
